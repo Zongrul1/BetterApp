@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorBar">#3f729b</color>
+    <color name="plan">#FFD84C</color>
+    <color name="checkIn">#FFF3DE</color>
+    <color name="memo">#099CFF</color>
+    <color name="pedometer">#F65C90</color>
+    <color name="focus">#0fD290</color>
+    <color name="emotion">#FFFACD</color>
+    <color name="login_button">#FF286B</color>
+    <color name="res_button">#3B5999</color>
+    <color name="text">#000000</color>
+    <color name="plan_text">#FFF4CA</color>
+    <color name="memo_text">#B8E2FF</color>
+    <color name="pedo_text">#F9B6CC</color>
+    <color name="focus_text">#ADEFD8</color>
+
+
+    <!-- Plan activity -->
+    <color name="day_text_color">#333333</color>
+    <color name="week_text_color">#767676</color>
+    <color name="default_text_color">#111111</color>
+    <color name="line_color">#d3d3d3</color>
+    <color name="color_white">#ffffff</color>
+    <color name="today_color">#f7b835</color>
+    <color name="selected_circle_color">#F3E6CA</color>
+    <color name="transparent_color">#000000</color>
+    <color name="graph_red">#f7b835</color>
+    <color name="graph_green">#ffffcc</color>
+    <color name="graph_blue">#99ccff</color>
+    <color name="graph_gray">#cccccc</color>
+    <color name="colorSelected">#e3e3e3</color>
+    <color name="colorTheme">#f7b835</color>
+    <color name="colorThemeDark">#9B6F2D</color>
+
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:padding="10dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/memoItemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/index"
+        android:padding="10dp"
+        android:orientation="vertical">
+    <TextView
+        android:id="@+id/memoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="25sp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical">
+    </TextView>
+    <TextView
+        android:id="@+id/memoDes"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp">
+    </TextView>
+    </LinearLayout>
+</LinearLayout>

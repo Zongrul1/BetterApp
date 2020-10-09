@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PedometerFragment"
+    android:background="@color/pedometer"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <Button
+            android:id="@+id/menuButton"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_arrow">
+        </Button>
+    </RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerInParent="true">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/icon_run">
+    </ImageView>
+    <TextView
+        android:id="@+id/countStep"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Steps"
+        android:textColor="@color/color_white"
+        android:layout_gravity="center">
+    </TextView>
+    <Button
+        android:id="@+id/refreshButton"
+        android:text="SHOW YOUR STEP"
+        android:layout_marginTop="20dp"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_step">
+    </Button>
+</LinearLayout>
+
+</RelativeLayout>

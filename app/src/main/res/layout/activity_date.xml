@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorSelected">
+    <TextView
+        android:id="@+id/date_year_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/default_text_color"
+        android:background="@color/color_white"/>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/date_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </androidx.viewpager.widget.ViewPager>
+    <TextView
+        android:id="@+id/date_item_header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/date_item_header"
+        android:padding="@dimen/default_layout_padding"
+        android:background="@color/color_white"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:textColor="@color/day_text_color"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/date_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white">
+        android:background="@color/color_white">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
