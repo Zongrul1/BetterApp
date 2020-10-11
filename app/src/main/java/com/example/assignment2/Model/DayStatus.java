@@ -1,4 +1,4 @@
-package com.example.assignment2.bean;
+package com.example.assignment2.Model;
 
 public class DayStatus {
     public static final int BAD=111;

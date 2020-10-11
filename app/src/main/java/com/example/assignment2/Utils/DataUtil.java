@@ -2,8 +2,8 @@ package com.example.assignment2.Utils;
 
 import android.content.ContentValues;
 
-import com.example.assignment2.bean.DayStatus;
-import com.example.assignment2.bean.PlanListItem;
+import com.example.assignment2.Model.DayStatus;
+import com.example.assignment2.Model.PlanListItem;
 
 public class DataUtil {
     public static ContentValues getDayStatusCV(DayStatus dayStatus){

@@ -12,20 +12,26 @@
         android:background="@drawable/index"
         android:padding="10dp"
         android:orientation="vertical">
-    <TextView
-        android:id="@+id/memoTitle"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:textSize="25sp"
-        android:layout_marginLeft="10dp"
-        android:gravity="center_vertical">
-    </TextView>
-    <TextView
-        android:id="@+id/memoDes"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="20sp">
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/delete"
+            android:layout_margin="10dp"
+            android:background="@drawable/icon_close"></Button>
+        <TextView
+            android:id="@+id/memoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="25sp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical">
+        </TextView>
+        <TextView
+            android:id="@+id/memoDes"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp">
     </TextView>
     </LinearLayout>
 </LinearLayout>

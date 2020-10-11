@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import com.example.assignment2.R;
 import com.example.assignment2.Utils.DateUtil;
 import com.example.assignment2.Utils.DisplayUtil;
-import com.example.assignment2.bean.DayStatus;
+import com.example.assignment2.Model.DayStatus;
 import com.example.assignment2.db.DayStatusDao;
 import com.example.assignment2.listener.OnItemSelectedListener;
 

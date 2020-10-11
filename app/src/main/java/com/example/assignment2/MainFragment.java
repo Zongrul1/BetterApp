@@ -4,21 +4,32 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.assignment2.Subsciber.HelperSubscriber;
+import com.example.assignment2.Subsciber.MainSubscriber;
 import com.example.assignment2.View.CircleImageView;
+import com.example.assignment2.rxRetrofit.RxRetrofit;
+import com.example.assignment2.rxRetrofit.Utility;
 
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 
 public class MainFragment extends Fragment {
@@ -32,6 +43,9 @@ public class MainFragment extends Fragment {
     private TextView introduction;
     private CircleImageView avater;
     private Button emotion;
+    private HelperSubscriber getState;
+    private HelperSubscriber putState;
+    private String[] states = {"Happy","Unhappy"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,9 +95,11 @@ public class MainFragment extends Fragment {
                         switch (which){
                             case 0:
                                 avater.setImageResource(R.drawable.unicorn_happy);
+                                requestUpdateState(states[0],MyApplication.getToken());
                                 break;
                             case 1:
                                 avater.setImageResource(R.drawable.unicorn_unhappy);
+                                requestUpdateState(states[1],MyApplication.getToken());
                                 break;
 
                         }
@@ -133,5 +149,54 @@ public class MainFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getState = new HelperSubscriber<Response<ResponseBody>>() {
+            @Override
+            public void onNext(Response<ResponseBody> response) throws IOException {
+                final String responseText = response.body().string();
+                String code = Utility.handleUser(responseText);
+                if(code.equals("200")){
+                    String state = Utility.handleState(responseText);
+                    if(state.equals("NULL")){
+                        requestUpdateState(states[1],MyApplication.getToken());
+                    }
+                    else if(state.equals(states[0])){
+                        avater.setImageResource(R.drawable.unicorn_happy);
+                    }
+                    else if(state.equals(states[1])){
+                        avater.setImageResource(R.drawable.unicorn_unhappy);
+                    }
+                }
+                else{
+                    Toast.makeText(getActivity(),"Invalid Token",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        putState = new HelperSubscriber<Response<ResponseBody>>() {
+            @Override
+            public void onNext(Response<ResponseBody> response) throws IOException {
+                final String responseText = response.body().string();
+                String code = Utility.handleUser(responseText);
+                if(code.equals("200")){
+                    Toast.makeText(getActivity(),"Update Successfully",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getActivity(),"Invalid Token",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        requestState(MyApplication.getToken());
+    }
+
+    public void requestState(String token){
+        RxRetrofit.getInstance().requestState(new MainSubscriber<Response<ResponseBody>>(getState,getActivity()),token);
+    }
+
+    public void requestUpdateState(String newState, String token){
+        RxRetrofit.getInstance().requestUpdateState(new MainSubscriber<Response<ResponseBody>>(putState,getActivity()),newState,token);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.assignment2.bean;
+package com.example.assignment2.Model;
 
 public class PlanListItem {
     public  static final int NO_CONTENT=101;

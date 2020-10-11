@@ -9,6 +9,18 @@ import java.util.List;
 
 public class MyApplication extends Application {
     private static Context mContext;
+    private static String token;
+    private static String username;
+    private static List<Activity> activitylsit=new LinkedList<Activity>();
+
+
+    public static String getToken() {
+        return token;
+    }
+
+    public static void setToken(String token) {
+        MyApplication.token = token;
+    }
 
     public static String getUsername() {
         return username;
@@ -17,9 +29,6 @@ public class MyApplication extends Application {
     public static void setUsername(String username) {
         MyApplication.username = username;
     }
-
-    private static String username;
-    private static List<Activity> activitylsit=new LinkedList<Activity>();
     @Override
     public void onCreate() {
         super.onCreate();

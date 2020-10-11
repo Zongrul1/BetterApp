@@ -21,7 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.assignment2.Utils.DateUtil;
 import com.example.assignment2.Utils.ToastUtil;
-import com.example.assignment2.bean.DayStatus;
+import com.example.assignment2.Model.DayStatus;
 import com.example.assignment2.db.DayStatusDao;
 import com.example.assignment2.db.PlanListItemDao;
 import com.google.android.material.tabs.TabLayout;

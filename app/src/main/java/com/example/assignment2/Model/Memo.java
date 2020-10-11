@@ -1,12 +1,22 @@
 package com.example.assignment2.Model;
 
 public class Memo {
+    private String id;
     private String title;
-    private String description;
+    private String content;
 
-    public Memo(String title, String description) {
+    public Memo(String id, String title, String content) {
+        this.id = id;
         this.title = title;
-        this.description = description;
+        this.content = content;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -17,11 +27,11 @@ public class Memo {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

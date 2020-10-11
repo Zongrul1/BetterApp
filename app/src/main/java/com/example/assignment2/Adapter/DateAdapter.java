@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.assignment2.R;
-import com.example.assignment2.bean.PlanListItem;
+import com.example.assignment2.Model.PlanListItem;
 
 import java.util.List;
 

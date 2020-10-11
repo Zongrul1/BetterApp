@@ -1,5 +1,7 @@
 package com.example.assignment2.rxRetrofit;
 
+import android.util.Log;
+
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -41,6 +43,42 @@ public class RxRetrofit {
                 observable = rxService.register(name,password);
                 break;
         }
+        if(observable != null) {toSubscribe(observable,subscriber);}
+    }
+
+    public void requestState(Subscriber<Response<ResponseBody>> subscriber,String token){
+        Observable<Response<ResponseBody>> observable = null;
+        observable = rxService.getState(token);
+        if(observable != null) {toSubscribe(observable,subscriber);}
+    }
+
+    public void requestUpdateState(Subscriber<Response<ResponseBody>> subscriber,String newState,String token){
+        Observable<Response<ResponseBody>> observable = null;
+        observable = rxService.updateState(newState,token);
+        if(observable != null) {toSubscribe(observable,subscriber);}
+    }
+
+    public void requestMemo(Subscriber<Response<ResponseBody>> subscriber,String token){
+        Observable<Response<ResponseBody>> observable = null;
+        observable = rxService.getMemo(token);
+        if(observable != null) {toSubscribe(observable,subscriber);}
+    }
+
+    public void requestPostMemo(Subscriber<Response<ResponseBody>> subscriber,String title,String content,String token){
+        Observable<Response<ResponseBody>> observable = null;
+        observable = rxService.postMemo(title,content,token);
+        if(observable != null) {toSubscribe(observable,subscriber);}
+    }
+
+    public void requestPutMemo(Subscriber<Response<ResponseBody>> subscriber,String memoId,String title,String content,String token){
+        Observable<Response<ResponseBody>> observable = null;
+        observable = rxService.putMemo(memoId,title,content,token);
+        if(observable != null) {toSubscribe(observable,subscriber);}
+    }
+
+    public void requestDeleteMemo(Subscriber<Response<ResponseBody>> subscriber,String memoId,String token){
+        Observable<Response<ResponseBody>> observable = null;
+        observable = rxService.deleteMemo(memoId,token);
         if(observable != null) {toSubscribe(observable,subscriber);}
     }
 

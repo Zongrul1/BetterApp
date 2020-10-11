@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.assignment2.MyApplication;
 import com.example.assignment2.Utils.DataUtil;
 import com.example.assignment2.Utils.LogUtil;
-import com.example.assignment2.bean.DayStatus;
+import com.example.assignment2.Model.DayStatus;
 
 import java.util.Calendar;
 import java.util.Date;

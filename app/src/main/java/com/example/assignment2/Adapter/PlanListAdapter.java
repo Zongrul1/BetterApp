@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.assignment2.R;
 import com.example.assignment2.Utils.LogUtil;
-import com.example.assignment2.bean.PlanListItem;
+import com.example.assignment2.Model.PlanListItem;
 import com.example.assignment2.listener.OnBackPressListener;
 import com.example.assignment2.listener.OnClickListener;
 import com.example.assignment2.listener.OnNextListener;

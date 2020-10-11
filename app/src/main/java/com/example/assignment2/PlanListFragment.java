@@ -23,7 +23,7 @@ import com.example.assignment2.Adapter.PlanListAdapter;
 import com.example.assignment2.Utils.DateUtil;
 import com.example.assignment2.Utils.LogUtil;
 import com.example.assignment2.Utils.ToastUtil;
-import com.example.assignment2.bean.PlanListItem;
+import com.example.assignment2.Model.PlanListItem;
 import com.example.assignment2.db.PlanListItemDao;
 import com.example.assignment2.listener.OnBackPressListener;
 import com.example.assignment2.listener.OnClickListener;
@@ -68,11 +68,8 @@ public class PlanListFragment extends Fragment {
     private void initViews(){
         dateTextView=mainLayout.findViewById(R.id.list_date);
         Typeface rl = ResourcesCompat.getFont(getActivity(),R.font.rl);
-        dateTextView=mainLayout.findViewById(R.id.list_date);
         dateTextView.setTypeface(rl);
-        dateTextView=mainLayout.findViewById(R.id.list_date);
         recyclerView=mainLayout.findViewById(R.id.list_recycler_view);
-
         initDate();
         initRecyclerView();
     }

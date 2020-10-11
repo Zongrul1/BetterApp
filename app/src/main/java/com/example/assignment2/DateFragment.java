@@ -29,7 +29,7 @@ import com.example.assignment2.Utils.DateUtil;
 import com.example.assignment2.Utils.DisplayUtil;
 import com.example.assignment2.Utils.LogUtil;
 import com.example.assignment2.View.CalendarView;
-import com.example.assignment2.bean.PlanListItem;
+import com.example.assignment2.Model.PlanListItem;
 import com.example.assignment2.db.PlanListItemDao;
 import com.example.assignment2.listener.OnItemSelectedListener;
 
@@ -76,12 +76,8 @@ public class DateFragment extends Fragment {
         yearAndMonth=mainLayout.findViewById(R.id.date_year_month);
         headerText=mainLayout.findViewById(R.id.date_item_header_text);
         Typeface rl = ResourcesCompat.getFont(getActivity(),R.font.rl);
-        yearAndMonth=mainLayout.findViewById(R.id.date_year_month);
-        headerText=mainLayout.findViewById(R.id.date_item_header_text);
         yearAndMonth.setTypeface(rl);
         headerText.setTypeface(rl);
-        yearAndMonth=mainLayout.findViewById(R.id.date_year_month);
-        headerText=mainLayout.findViewById(R.id.date_item_header_text);
         recyclerView=mainLayout.findViewById(R.id.date_recyclerView);
         initYearAndMonthHeader();
         initCalendarViews();

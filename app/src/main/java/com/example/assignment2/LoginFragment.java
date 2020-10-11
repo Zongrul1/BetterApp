@@ -109,6 +109,7 @@ public class LoginFragment extends Fragment {
                     final String responseText = response.body().string();
                     String code = Utility.handleUser(responseText);
                     if(code.equals("200")){
+                        MyApplication.setToken(Utility.handleToken(responseText));
                         MyApplication.setUsername(username_input.getText().toString());
                         Intent intent = new Intent(getActivity(),MainActivity.class);
                         startActivity(intent);
