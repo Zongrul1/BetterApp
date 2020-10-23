@@ -19,8 +19,8 @@ public class RxRetrofit {
     private static RxService rxService;
     private RxRetrofit(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)//基础URL 建议以 / 结尾
-                .addConverterFactory(GsonConverterFactory.create())//设置 Json 转换器
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         rxService = retrofit.create(RxService.class);

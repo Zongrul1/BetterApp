@@ -3,6 +3,7 @@ package com.example.assignment2.Utils;
 import android.content.ContentValues;
 
 import com.example.assignment2.Model.DayStatus;
+import com.example.assignment2.Model.Memo;
 import com.example.assignment2.Model.PlanListItem;
 
 public class DataUtil {
@@ -19,20 +20,22 @@ public class DataUtil {
         values.put("day",dayStatus.getDay());
         return values;
     }
-    public static DayStatus getDayStatus(String time, int listNum, int finishNum, int unFinishNum){
-        int year= Integer.valueOf(time.substring(0,4));
-        int month= Integer.valueOf(time.substring(5,7));
-        int day= Integer.valueOf(time.substring(8,10));
-        LogUtil.e("year="+year+"\tmonth="+month+"\tday="+day);
-        float ratio=finishNum*1.0f/listNum;
+    public static DayStatus getDayStatus(String time, int listNum, int finishNum, int unFinishNum) {
+        int year = Integer.valueOf(time.substring(0, 4));
+        int month = Integer.valueOf(time.substring(5, 7));
+        int day = Integer.valueOf(time.substring(8, 10));
+        // LogUtil.e("year="+year+"\tmonth="+month+"\tday="+day);
+        float ratio = finishNum * 1.0f / listNum;
         int status;
-        if(ratio>=0.8f){
-            status= DayStatus.GOOD;
-        }else if(ratio>=0.5f){
-            status= DayStatus.ORDINARY;
-        }else{
-            status= DayStatus.BAD;
-        }
+        if (ratio >= 0.9f) {
+            status = DayStatus.GOOD;
+        } else if (ratio >= 0.6f) {
+            status = DayStatus.ORDINARY;
+        } else if (ratio >= 0.4f) {
+            status = DayStatus.NOT_WELL;
+        } else{
+            status = DayStatus.BAD;
+    }
         return new DayStatus(time,status,ratio,listNum,finishNum,unFinishNum,year,month,day);
     }
     public static ContentValues getListItemCV(PlanListItem listItem){
@@ -53,15 +56,25 @@ public class DataUtil {
         values.put("status",status);
         return values;
     }
-    public static ContentValues getAlarmItemCV(String time, String note){
+
+    /*
+    /**
+     *  Memo
+          //has changed to firebase
+
+    public static ContentValues getMemoCV(Memo memo){
         ContentValues values=new ContentValues();
-        values.put("time",time);
-        values.put("note",note);
+        values.put("title",memo.getTitle());
+        values.put("content",memo.getContent());
+        values.put("time",memo.getTime());
         return values;
     }
-    public static ContentValues getAlarmItemCV(boolean isOpen){
+
+    public static ContentValues generateMemoCV(String title, String content){
         ContentValues values=new ContentValues();
-        values.put("isOpen",isOpen);
+        values.put("title",title);
+        values.put("content",content);
         return values;
     }
+*/
 }

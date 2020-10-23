@@ -16,7 +16,6 @@ import com.example.assignment2.Model.PlanListItem;
 import java.util.List;
 
 public class DateAdapter extends RecyclerView.Adapter<DateAdapter.NormalViewHolder>  {
-
     class NormalViewHolder extends PlanListAdapter.ViewHolder {
         ImageView status;
         TextView content;
@@ -39,9 +38,9 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.NormalViewHold
     @Override
     public DateAdapter.NormalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView=null;
-        if(viewType== PlanListItem.TYPE_EMPTY){
-            itemView= LayoutInflater.from(context).inflate(R.layout.date_empty_item,parent,false);
-        }else if(viewType== PlanListItem.TYPE_NORMAL){
+        if(viewType == PlanListItem.TYPE_EMPTY){
+            itemView = LayoutInflater.from(context).inflate(R.layout.date_empty_item,parent,false);
+        }else if(viewType == PlanListItem.TYPE_NORMAL){
             itemView= LayoutInflater.from(context).inflate(R.layout.date_normal_item,parent,false);
         }
         return new NormalViewHolder(itemView,viewType);
@@ -50,14 +49,15 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.NormalViewHold
     @Override
     public void onBindViewHolder(@NonNull DateAdapter.NormalViewHolder holder, int position) {
         int itemViewType=getItemViewType(position);
-        if(itemViewType== PlanListItem.TYPE_NORMAL){
+        if(itemViewType == PlanListItem.TYPE_NORMAL){
             int status=dataList.get(position).getStatus();
             String content=dataList.get(position).getContent();
-            if(status== PlanListItem.FINISH){
+            //set drawable image relating to 'status'
+            if(status == PlanListItem.FINISH){
                 holder.status.setImageResource(R.drawable.finish);
-            }else if(status== PlanListItem.UNFINISH){
+            }else if(status == PlanListItem.UNFINISH){
                 holder.status.setImageResource(R.drawable.un_finish);
-            }else if(status== PlanListItem.NO_RECORD){
+            }else if(status == PlanListItem.NO_RECORD){
                 holder.status.setImageResource(R.drawable.circle);
             }
             holder.content.setText(content);
@@ -66,7 +66,7 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.NormalViewHold
 
     @Override
     public int getItemCount() {
-        if(dataList.size()==0){
+        if(dataList.size() == 0){
             return 1;
         }
         return dataList.size();
@@ -74,7 +74,7 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.NormalViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if(dataList.size()==0){
+        if(dataList.size() == 0){
             return PlanListItem.TYPE_EMPTY;
         }else{
             return PlanListItem.TYPE_NORMAL;

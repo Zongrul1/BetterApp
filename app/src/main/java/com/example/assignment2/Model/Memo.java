@@ -5,19 +5,19 @@ public class Memo {
     private String title;
     private String content;
 
-    public Memo(String id, String title, String content) {
+
+    public Memo(String id,String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
+
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) { this.id = id; }
 
     public String getTitle() {
         return title;
@@ -34,4 +34,7 @@ public class Memo {
     public void setContent(String content) {
         this.content = content;
     }
+
+
+
 }

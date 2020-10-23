@@ -34,11 +34,10 @@ public class DayStatusDao {
         calendar.setTime(date);
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH)+1;
-        //当月天数，记录天数,优秀的，一般的，糟糕的，未记录的，最优秀的那一天，最糟糕的一天
         calendar.add(Calendar.MONTH,1);
         calendar.set(Calendar.DAY_OF_MONTH,0);
         int dayNum=calendar.get(Calendar.DAY_OF_MONTH);
-        int recordDay=0,good=0,ordinary=0,bad=0,notRecord=0,bestDay=0,worstDay=0;
+        int recordDay=0,goodDay=0,ordinaryDay=0,badDay=0,notwellDay=0,notRecordDay=0;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         Cursor cursor=db.query("DayStatus",null,"year=? and month=?",new String[]{year+"",month+""},null,null,null);
         float bestRatio=0,worstRatio=1;
@@ -46,29 +45,34 @@ public class DayStatusDao {
             recordDay+=1;
             int status=cursor.getInt(cursor.getColumnIndex("status"));
             float ratio=cursor.getFloat(cursor.getColumnIndex("ratio"));
-            int day=cursor.getInt(cursor.getColumnIndex("day"));
-            LogUtil.e("day="+day);
+          //  LogUtil.e("day="+day);
             if(ratio>bestRatio){
                 bestRatio=ratio;
-                bestDay=day;
             }
             if(ratio<worstRatio){
                 worstRatio=ratio;
-                worstDay=day;
             }
-            if(status== DayStatus.GOOD){
-                good+=1;
-            }else if(status== DayStatus.ORDINARY){
-                ordinary+=1;
-            }else if(status== DayStatus.BAD){
-                bad+=1;
+            if(status == DayStatus.GOOD){
+                goodDay+=1;
+            }else if(status == DayStatus.ORDINARY){
+                ordinaryDay+=1;
+            }else if(status == DayStatus.BAD){
+                badDay+=1;
+            }
+            else if(status == DayStatus.NOT_WELL){
+                notwellDay+=1;
             }
         }
         cursor.close();
-        notRecord=dayNum-recordDay;
-        int[]monthParams=new int[8];
-        monthParams[0]=dayNum;monthParams[1]=recordDay;monthParams[2]=good;monthParams[3]=ordinary;
-        monthParams[4]=bad;monthParams[5]=notRecord;monthParams[6]=bestDay;monthParams[7]=worstDay;
-        return monthParams;
+        notRecordDay=dayNum-recordDay;
+        int[]monthSort=new int[7];
+        monthSort[0]=dayNum;
+        monthSort[1]=recordDay;
+        monthSort[2]=goodDay;
+        monthSort[3]=ordinaryDay;
+        monthSort[4]=badDay;
+        monthSort[5]=notRecordDay;
+        monthSort[6]=notwellDay;
+        return monthSort;
     }
 }

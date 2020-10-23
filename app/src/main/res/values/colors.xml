@@ -19,7 +19,7 @@
     <color name="focus_text">#ADEFD8</color>
 
 
-    <!-- Plan activity -->
+    <!-- Plan List activity -->
     <color name="day_text_color">#333333</color>
     <color name="week_text_color">#767676</color>
     <color name="default_text_color">#111111</color>
@@ -32,6 +32,7 @@
     <color name="graph_green">#ffffcc</color>
     <color name="graph_blue">#99ccff</color>
     <color name="graph_gray">#cccccc</color>
+    <color name="graph_purple">#ff00ff</color>
     <color name="colorSelected">#e3e3e3</color>
     <color name="colorTheme">#f7b835</color>
     <color name="colorThemeDark">#9B6F2D</color>

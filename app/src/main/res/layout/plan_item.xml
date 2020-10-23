@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.example.assignment2.View.DeletableEdiText
-                android:id="@+id/item_content_edit"
+                android:id="@+id/item_content_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"

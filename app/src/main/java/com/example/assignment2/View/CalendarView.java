@@ -29,30 +29,30 @@ public class CalendarView extends View {
     private float rightPadding;
     private float cellHeight;
     private float cellWidth;
-    private Paint weekPaint;//日、一
+    private Paint weekPaint;
     private int weekTextColor= getResources().getColor(R.color.week_text_color);
-    private Paint dayPaint;//1、2
+    private Paint dayPaint;
     private int dayTextColor=getResources().getColor(R.color.day_text_color);
-    private Paint dayStatusBgPaint;//背后的阴影效果，正方形
+    private Paint dayStatusBgPaint;
     private Paint dayStatusPointPaint;
     private int goodColor=getResources().getColor(R.color.graph_red);
     private int ordinaryColor=getResources().getColor(R.color.graph_green);
     private int badColor=getResources().getColor(R.color.graph_blue);
-    private Paint selectedBgPaint;//圆圈
+    private Paint selectedBgPaint;
     private int selectedBgColor=getResources().getColor(R.color.selected_circle_color);
     private int todayColor=getResources().getColor(R.color.today_color);
-    private Calendar calendar;//这就是个变量
-    private Date todayDate;//不变的，就是今天
+    private Calendar calendar;
+    private Date todayDate;
     private Date curMonthDate;
     private Date selectedDate;
-    private String[] weekText=new String[]{"日","一","二","三","四","五","六"};
+    private String[] weekText=new String[]{"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
     private int[] dayText=new int[42];
     private int curMonthStartIndex;
     private int curMonthEndIndex;
-    private int dayNum;//这个月有多少天
+    private int dayNum;
     private float dayTextHeight;
     private OnItemSelectedListener onItemSelectedListener;
-    private int[] status=new int[42];//对应每天的list完成状况
+    private int[] status=new int[42];
 
     public CalendarView(Context context) {
         this(context,null);
@@ -74,15 +74,7 @@ public class CalendarView extends View {
         cellHeight=cellWidth*0.8f;
 
         calculateStartEndIndex();
-//        if(curMonthEndIndex<28){
-//            height=(int)(cellHeight*5);
-//        }else if(curMonthEndIndex<35){
-//            height=(int)(cellHeight*6);
-//        }else{
-//            height=(int)(cellHeight*7);
-//        }
         height=(int)(cellHeight*7);
-
 
         weekPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         weekPaint.setTextSize(DisplayUtil.sp2px(16));
@@ -114,26 +106,16 @@ public class CalendarView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-        //画日、一、二、三、四、五、六那一行
         float weekTextX,weekTextY;
         weekTextY=cellHeight/2+dayTextHeight/2;
         for(int i=0;i<weekText.length;i++){
             weekTextX=leftPadding+i*cellWidth+(cellWidth-measureWidth(weekText[i],weekPaint))/2f;
             canvas.drawText(weekText[i],weekTextX,weekTextY,weekPaint);
         }
-
-        //计算42个数据
         calculateDate();
-
-        //画selected背景
         drawSelectedBg(canvas);
-
-        //画当天状况的背景
-//        drawStatusBg(canvas);
         drawPointBg(canvas);
 
-
-        //画1到31号
         String curYearAndMonth=getYearAndMonth(curMonthDate);
         String todayYearAndMonth=getYearAndMonth(todayDate);
         int todayIndex=-1;
@@ -168,7 +150,7 @@ public class CalendarView extends View {
     private void calculateStartEndIndex(){
         calendar.setTime(curMonthDate);
         calendar.set(Calendar.DAY_OF_MONTH,1);
-        int dayOfWeek=calendar.get(Calendar.DAY_OF_WEEK);//1号是星期几
+        int dayOfWeek=calendar.get(Calendar.DAY_OF_WEEK);
         curMonthStartIndex=dayOfWeek-1;
         calendar.add(Calendar.MONTH,1);
         calendar.set(Calendar.DAY_OF_MONTH,0);
@@ -274,11 +256,6 @@ public class CalendarView extends View {
         return true;
     }
 
-    /**
-     * 获取日期的行数，1号是在第一行
-     * @param index
-     * @return
-     */
     private int getRow(int index){
         return index/7+1;
     }

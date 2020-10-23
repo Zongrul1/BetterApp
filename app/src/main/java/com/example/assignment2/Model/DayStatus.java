@@ -4,6 +4,7 @@ public class DayStatus {
     public static final int BAD=111;
     public static final int ORDINARY=112;
     public static final int GOOD=113;
+    public static final int NOT_WELL=114;
     private int id;
     private String time;
     private int status;
@@ -12,7 +13,6 @@ public class DayStatus {
     private int unFinishNum;
     private float ratio;
     private int year;
-    /**这里的月份是实际的月份，例如现在2019/03/18，月份就是3 */
     private int month;
     private int day;
     public DayStatus(String time, int status, float ratio, int listNum, int finishNum, int unFinishNum, int year, int month, int day){

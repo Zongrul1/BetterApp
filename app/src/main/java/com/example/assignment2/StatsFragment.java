@@ -7,7 +7,6 @@ import android.app.usage.NetworkStatsManager;
 import android.app.usage.UsageStats;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -18,13 +17,11 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.assignment2.R;
 import com.example.assignment2.Utils.FocusHelper;
 import com.example.assignment2.Utils.DayAxisValueFormatter;
 import com.example.assignment2.Utils.TimeTrackerPrefHandler;
@@ -44,9 +41,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StatsFragment extends Fragment {
     private BarChart barChart;
@@ -110,6 +109,7 @@ public class StatsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mode = TimeTrackerPrefHandler.INSTANCE.getMode(context);
         String serialized = TimeTrackerPrefHandler.INSTANCE.getPkgList(context);
+        //Log.d("STATSINFO", serialized);
         if (serialized != null) {
             appList = null;
             appNameList = null;
@@ -182,7 +182,7 @@ public class StatsFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setUsageInfo(long startMillis, long endMillis) {
-        if (appList != null) {
+        /*if (appList != null) {
             PackageManager packageManager = context.getPackageManager();
             ArrayList<Float> values = new ArrayList<Float>();
             ApplicationInfo info = null;
@@ -214,19 +214,45 @@ public class StatsFragment extends Fragment {
                     appList.remove(appPkg);
                 }
             }
-            saveAppPreference();
-            if (values.size() != 0) {
-                setChart(values);
+        }
+        */
+        PackageManager packageManager = context.getPackageManager();
+        ArrayList<Float> values = new ArrayList<Float>();
+        HashMap<Float, String> valueMap = fetchAppStatsInfo(startMillis, endMillis);
+        TreeMap<Float, String> valueTree = new TreeMap<>(valueMap);
+        int count = 0;
+        String appname = null;
+        for (Map.Entry<Float, String> entry : valueTree.entrySet()) {
+            try {
+                values.add(entry.getKey());
+                appname = (String) packageManager.getApplicationLabel(packageManager.
+                        getApplicationInfo(entry.getValue(), PackageManager.GET_META_DATA));
+                appNameList.add(appname);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
             }
+            count += 1;
+            if (count > 5){break;}
+        }
+
+        saveAppPreference();
+        if (values.size() != 0) {
+            setChart(values);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private float fetchAppStatsInfo(long startMillis, long endMillis, String appPkg) {
+    private HashMap<Float, String> fetchAppStatsInfo(long startMillis, long endMillis){//, String appPkg) {
         Map<String, UsageStats> lUsageStatsMap = FocusHelper.getUsageStatsManager().
                 queryAndAggregateUsageStats(startMillis, endMillis);
+        //for (String k : lUsageStatsMap.keySet()) {
+        //    Log.d("STATSINFO", k);
+        //}
+        //Log.d("STATSINFO", "~~~");
         float total = 0.0f;
-        if (lUsageStatsMap.containsKey(appPkg)) {
+        HashMap<Float, String> totalMap = new HashMap<>();
+        for (String appPkg : lUsageStatsMap.keySet()){
+        //if (lUsageStatsMap.containsKey(appPkg)) {
             if (selectedPeriod == DAILY || selectedPeriod == YESTERDAY) {
                 total = (FocusHelper.getMinutes(lUsageStatsMap.get(appPkg).
                         getTotalTimeInForeground()));
@@ -234,8 +260,9 @@ public class StatsFragment extends Fragment {
                 total = (FocusHelper.getHours(lUsageStatsMap.get(appPkg).
                         getTotalTimeInForeground()));
             }
+            totalMap.put(total, appPkg);
         }
-        return total;
+        return totalMap;
     }
 
     private float fetchNetworkStatsInfo(long startMillis, long endMillis, int uid) {
@@ -295,6 +322,7 @@ public class StatsFragment extends Fragment {
         barChart.setPinchZoom(false);
 
         barChart.setDrawGridBackground(false);
+        barChart.getAxisLeft().setDrawGridLines(false);
         // barChart.setDrawYLabels(false);
         IAxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(barChart, appNameList);
 

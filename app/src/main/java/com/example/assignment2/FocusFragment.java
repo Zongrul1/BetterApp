@@ -41,8 +41,7 @@ import static com.example.assignment2.Utils.FocusHelper.initAppHelper;
 public class FocusFragment extends Fragment {
 
     private Button MenuButton;
-    private boolean type;
-
+    private MainActivity mainActivity;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -50,9 +49,12 @@ public class FocusFragment extends Fragment {
     private static FocusAdapter focusAdapter;
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 100;
     private String[] defaultList = {"com.facebook.katana", "com.instagram.android", "com.whatsapp", "com.android.chrome", "com.twitter.android"};
-
     private Typeface rl;
     private View rootView;
+
+    //public void testInit(){
+    //
+    //}
 
     @Override
     public void onResume() {
@@ -69,8 +71,10 @@ public class FocusFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //this.testInit();
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.setSelectedFragemnt(this);
         rootView = inflater.inflate(R.layout.fragment_focus, container, false);
-        type = false;
         MenuButton = rootView.findViewById(R.id.menuButton);
         MainActivity mainActivity = (MainActivity) getActivity();
 //        final DrawerLayout drawerLayout = mainActivity.drawerLayout;

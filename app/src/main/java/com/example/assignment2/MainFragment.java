@@ -38,14 +38,15 @@ public class MainFragment extends Fragment {
     private RelativeLayout memo;
     private RelativeLayout pedo;
     private RelativeLayout focus;
-
+    private MainActivity mainActivity;
     private TextView username;
     private TextView introduction;
     private CircleImageView avater;
     private Button emotion;
+    private Button changeUser;
     private HelperSubscriber getState;
     private HelperSubscriber putState;
-    private String[] states = {"Happy","Unhappy"};
+    private String[] states = {"Happy","Normal","Unhappy"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the fragment_login for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.setSelectedFragemnt(this);
         plan = view.findViewById(R.id.plan);
         memo = view.findViewById(R.id.memo);
         pedo = view.findViewById(R.id.pedo);
@@ -66,10 +69,10 @@ public class MainFragment extends Fragment {
         avater = view.findViewById(R.id.avater);
         introduction = view.findViewById(R.id.introduction);
         emotion = view.findViewById(R.id.emotion);
+        changeUser = view.findViewById(R.id.change_user);
         introduction = view.findViewById(R.id.introduction);
         username = view.findViewById(R.id.username);
         username.setText(username.getText() + " "  + MyApplication.getUsername());
-        Typeface rt = ResourcesCompat.getFont(getActivity(),R.font.rt);
         Typeface rl = ResourcesCompat.getFont(getActivity(),R.font.rl);
         introduction.setTypeface(rl);
         username.setTypeface(rl);
@@ -80,6 +83,23 @@ public class MainFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
+        changeUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getActivity()).setTitle("Log out").setMessage("Do you want to log out？")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+
+                            }
+                        }) .show();
+            }
+        });
 
         emotion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +107,7 @@ public class MainFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CardDialogStyle);
                 builder.setTitle("Choose Your Emotion Today");
                 //    指定下拉列表的显示数据
-                final String[] contacts = {"Happy", "Unhappy"};
+                final String[] contacts = {"Happy", "Normal","Unhappy"};
                 //    设置一个下拉的列表选择项
                 builder.setItems(contacts, new DialogInterface.OnClickListener() {
                     @Override
@@ -98,8 +118,12 @@ public class MainFragment extends Fragment {
                                 requestUpdateState(states[0],MyApplication.getToken());
                                 break;
                             case 1:
-                                avater.setImageResource(R.drawable.unicorn_unhappy);
+                                avater.setImageResource(R.drawable.unicorn_normal);
                                 requestUpdateState(states[1],MyApplication.getToken());
+                                break;
+                            case 2:
+                                avater.setImageResource(R.drawable.unicorn_unhappy);
+                                requestUpdateState(states[2],MyApplication.getToken());
                                 break;
 
                         }
@@ -126,10 +150,10 @@ public class MainFragment extends Fragment {
         pedo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new PedometerFragment();
+
                 ((AppCompatActivity)getActivity()).getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.layout_fragment, fragment)
+                        .replace(R.id.layout_fragment, MyApplication.getPedofragment())
                         .addToBackStack(null)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
@@ -168,7 +192,10 @@ public class MainFragment extends Fragment {
                         avater.setImageResource(R.drawable.unicorn_happy);
                     }
                     else if(state.equals(states[1])){
-                        avater.setImageResource(R.drawable.unicorn_unhappy);
+                        avater.setImageResource(R.drawable.unicorn_normal);
+                    }
+                    else if(state.equals(states[2])){
+                        avater.setImageResource(R.drawable.unicorn_happy);
                     }
                 }
                 else{

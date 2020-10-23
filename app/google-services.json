@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "476568743845",
+    "firebase_url": "https://hearthyapp.firebaseio.com",
+    "project_id": "hearthyapp",
+    "storage_bucket": "hearthyapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476568743845:android:da356d30f6777025f4424c",
+        "android_client_info": {
+          "package_name": "com.example.assignment2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476568743845-o1re596dbippv4kvku1lq5ole28espna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-YsRjxlo_XgjxIJq2N-rFUcJafg0CoCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476568743845-o1re596dbippv4kvku1lq5ole28espna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

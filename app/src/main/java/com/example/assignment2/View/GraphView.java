@@ -24,6 +24,7 @@ public class GraphView extends View {
     private float goodPercent;
     private float ordinaryPercent;
     private float badPercent;
+    private float notwellPercent;
     private float noRecordPercent;
 
     private int outerBgColor;
@@ -31,13 +32,14 @@ public class GraphView extends View {
     private int goodColor;
     private int ordinaryColor;
     private int badColor;
+    private int notwellColor;
 
     private float circleX;
     private float circleY;
     private float outerRadius;
     private RectF rectF;
 
-    private String[] text=new String[4];
+    private String[] text=new String[5];
     private float maxTextWidth;
     private float maxTextHeight;
     private float baseLineTranslate;
@@ -58,7 +60,9 @@ public class GraphView extends View {
         innerBgColor= getResources().getColor(R.color.color_white);
         goodColor=getResources().getColor(R.color.graph_red);
         ordinaryColor=getResources().getColor(R.color.graph_green);
+        notwellColor=getResources().getColor(R.color.graph_purple);
         badColor=getResources().getColor(R.color.graph_blue);
+
 
         circlePaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         circlePaint.setStyle(Paint.Style.FILL);
@@ -75,7 +79,8 @@ public class GraphView extends View {
 
         goodPercent=0.48f;
         ordinaryPercent=0.12f;
-        badPercent=0.18f;
+        badPercent=0.08f;
+        notwellPercent=0.1f;
         noRecordPercent=0.22f;
 
         iconCircleRadius= DisplayUtil.dp2px(10);
@@ -99,15 +104,14 @@ public class GraphView extends View {
     private void initText(){
         text[0]= String.format(getResources().getString(R.string.graph_good),(int)(goodPercent*100+0.5f));
         text[1]= String.format(getResources().getString(R.string.graph_ordinary),(int)(ordinaryPercent*100+0.5f));
-        text[2]= String.format(getResources().getString(R.string.graph_bad),(int)(badPercent*100+0.5f));
-        text[3]= String.format(getResources().getString(R.string.graph_no_record),(int)(noRecordPercent*100+0.5f));
+        text[2]= String.format(getResources().getString(R.string.graph_notwell),(int)(notwellPercent*100+0.5f));
+        text[3]= String.format(getResources().getString(R.string.graph_bad),(int)(badPercent*100+0.5f));
+        text[4]= String.format(getResources().getString(R.string.graph_no_record),(int)(noRecordPercent*100+0.5f));
     }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         setMeasuredDimension((int)width,(int)height);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         drawOuterCircle(canvas);
@@ -127,15 +131,16 @@ public class GraphView extends View {
         float goodAngle=360*goodPercent;
         float ordinaryAngle=360*ordinaryPercent;
         float badAngle=360*badPercent;
+        float notwellAngle=360*notwellPercent;
 
         arcPaint.setColor(goodColor);
         canvas.drawArc(rectF,-90,goodAngle,true,arcPaint);
         arcPaint.setColor(ordinaryColor);
         canvas.drawArc(rectF,goodAngle-90,ordinaryAngle,true,arcPaint);
+        arcPaint.setColor(notwellColor);
+        canvas.drawArc(rectF,goodAngle+ordinaryAngle-90,notwellAngle,true,arcPaint);
         arcPaint.setColor(badColor);
-        canvas.drawArc(rectF,goodAngle+ordinaryAngle-90,badAngle,true,arcPaint);
-//        arcPaint.setColor(getResources().getColor(R.color.graph_gray));
-//        canvas.drawArc(rectF,goodAngle+ordinaryAngle+badAngle-90+30,320-goodAngle-ordinaryAngle-badAngle,true,arcPaint);
+        canvas.drawArc(rectF,goodAngle+ordinaryAngle+notwellAngle-90,badAngle,true,arcPaint);
     }
     private void drawInnerCircle(Canvas canvas){
         //draw innercircle
@@ -144,19 +149,21 @@ public class GraphView extends View {
         canvas.drawCircle(circleX,circleY,innerRaidus,circlePaint);
     }
     private void drawText(Canvas canvas){
-        //todo 如果maxTextWidth+outerRaidus>width，remeasureWidth，重新设置textSize
         float leftX=width-maxTextWidth-2*leftRightPadding;
         float topY=(height-4*maxTextHeight-3*textSpace)/2;
         float iconCircleX=leftX+iconCircleRadius;
         float iconCircleY=topY+maxTextHeight/2;
-        for(int i=0;i<4;i++){
+        for(int i=0;i<5;i++){
             if(i==0){
                 iconCirclePaint.setColor(goodColor);
             }else if(i==1){
                 iconCirclePaint.setColor(ordinaryColor);
             }else if(i==2){
+                iconCirclePaint.setColor(notwellColor);
+            }else if(i==3) {
                 iconCirclePaint.setColor(badColor);
-            }else{
+            }
+            else{
                 iconCirclePaint.setColor(outerBgColor);
             }
             canvas.drawCircle(iconCircleX,iconCircleY+i*maxTextHeight+i*textSpace,iconCircleRadius,iconCirclePaint);
@@ -164,13 +171,13 @@ public class GraphView extends View {
                     iconCircleY+baseLineTranslate+maxTextHeight*i+i*textSpace,textPaint);
         }
     }
-    public void setPercent(float goodPercent,float ordinaryPercent,float badPercent,float noRecordPercent){
+    public void setPercent(float goodPercent,float ordinaryPercent,float notwellPercent,float badPercent,float noRecordPercent){
         this.goodPercent=goodPercent;
         this.ordinaryPercent=ordinaryPercent;
         this.badPercent=badPercent;
+        this.notwellPercent=notwellPercent;
         this.noRecordPercent=noRecordPercent;
         initText();
         this.postInvalidate();
     }
-
 }

@@ -21,7 +21,7 @@ public class PlanListItemDao {
         return id;
     }
     public static DayStatus updateNoRecord(String time){
-        LogUtil.e("我是真正的，开始更新后台数据了");
+       // LogUtil.e("Updating back-end data now");
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         Cursor cursor=db.query("ListItem",null,"time=? and status!=?",new String[]{time,"101"},null,null,"l_id asc");
         int recordNum=0,finishNum=0,unFinishNum=0;

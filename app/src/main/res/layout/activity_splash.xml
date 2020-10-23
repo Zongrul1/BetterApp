@@ -20,8 +20,8 @@
             android:id="@+id/name"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:textSize="35sp"
-            android:text="HEARTHY"
+            android:textSize="45sp"
+            android:text="BETTER"
             android:textColor="@color/text"></TextView>
     </LinearLayout>
     <TextView

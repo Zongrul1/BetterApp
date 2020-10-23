@@ -18,10 +18,5 @@ public class DisplayUtil {
     public static int getScreenWidth(){
         return displayMetrics.widthPixels;
     }
-    public static int getScreenHeight(){
-        return displayMetrics.heightPixels;
-    }
-
-
 }
 

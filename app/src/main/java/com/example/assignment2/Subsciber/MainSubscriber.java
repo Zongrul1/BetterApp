@@ -1,12 +1,17 @@
 package com.example.assignment2.Subsciber;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+
+import com.example.assignment2.LoginActivity;
+import com.example.assignment2.MyApplication;
 
 import rx.Subscriber;
 
@@ -29,7 +34,7 @@ public class MainSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onCompleted() {
-        //Toast.makeText(context, "这次请求使用了Rxjava", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -41,6 +46,9 @@ public class MainSubscriber<T> extends Subscriber<T> {
         } else {
             Toast.makeText(context, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
             System.out.println(e.getMessage());
+            new AlertDialog.Builder(context).setTitle("Error").setMessage("This account log in in another device").show();
+            Intent intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
         }
     }
 

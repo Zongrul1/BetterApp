@@ -103,7 +103,7 @@ public class DateFragment extends Fragment {
         onItemSelectedListener=new OnItemSelectedListener() {
             @Override
             public void onItemSelected(Date selectedDate) {
-                LogUtil.e("换日期了:"+ DateUtil.getYearMonthDayNumberic(selectedDate));
+              //  LogUtil.e("Update date:"+ DateUtil.getYearMonthDayNumberic(selectedDate));
                 initHeaderText(selectedDate);
 
                 Date lastMonthDate= DateUtil.getLastMonthDate(selectedDate);
@@ -142,11 +142,11 @@ public class DateFragment extends Fragment {
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                LogUtil.e("onPageSelected,position="+position);
+               // LogUtil.e("onPageSelected,position="+position);
                 currentImgIndex=position;
                 if(currentImgIndex==2){
                     clickNext();
-                    LogUtil.e("currentImgIndex=2");
+                 //   LogUtil.e("currentImgIndex=2");
                     isChanged=true;
                 }else if(currentImgIndex==0){
                     clickLast();
@@ -155,11 +155,11 @@ public class DateFragment extends Fragment {
             }
             @Override
             public void onPageScrollStateChanged(int state) {
-                LogUtil.e("onPageScrolled");
+               // LogUtil.e("onPageScrolled");
                 if(isChanged&&state==ViewPager.SCROLL_STATE_IDLE){
                     setCurMonthAndSelectedDate();
 
-                    LogUtil.e("onPageScrolled,setCurrentItem1");
+                 //   LogUtil.e("onPageScrolled,setCurrentItem1");
                     viewPager.setCurrentItem(1,false);
                     isChanged=false;
                     onItemSelectedListener.onItemSelected(calendarViews[1].getSelectedDate());

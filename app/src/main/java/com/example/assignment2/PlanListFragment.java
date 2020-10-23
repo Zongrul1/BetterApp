@@ -143,8 +143,8 @@ public class PlanListFragment extends Fragment {
                         View itemView=recyclerView.getChildAt(nextPos-firstVisibleItemPos);
                         PlanListAdapter.ViewHolder viewHolder=(PlanListAdapter.ViewHolder)recyclerView.getChildViewHolder(itemView);
                         layoutManager.scrollToPositionWithOffset(nextPos,50);
-                        viewHolder.content_edit.requestFocus();
-                        viewHolder.content_edit.setSelection(content.length());
+                        viewHolder.content_edit_text.requestFocus();
+                        viewHolder.content_edit_text.setSelection(content.length());
                     }
                 }
             }
@@ -157,7 +157,7 @@ public class PlanListFragment extends Fragment {
                     if(startSelection==0){
                         long currentTime= System.currentTimeMillis();
                         if(currentTime-preTime>2000){
-                            ToastUtil.showToast("再按一次删除当前项");
+                            ToastUtil.showToast("Press twice to delete current row");
                             preTime=currentTime;
                         }else{
                             if(pos-1>=0){
@@ -188,17 +188,10 @@ public class PlanListFragment extends Fragment {
         return item;
     }
 
-    /**
-     * 判断当前是不是最后一项
-     * @param pos
-     */
     private boolean isLastItem(int pos){
         return pos==dataList.size()-1;
     }
-    /**
-     * 如果当前是最后一项，就增加一个item
-     * @param pos
-     */
+
     private void addEmptyItem(int pos){
         if(isLastItem(pos)){
             PlanListItem listItem=createEmptyItem();
@@ -208,22 +201,12 @@ public class PlanListFragment extends Fragment {
         }
     }
 
-    /**
-     * 标记当前项的状态，完成/未完成
-     * @param pos
-     * @param status
-     */
     private void markStatus(int pos, int status){
         dataList.get(pos).setStatus(status);
         adapter.notifyItemChanged(pos);
         PlanListItemDao.updateItem(dataList.get(pos).getId(),status);
     }
 
-    /**
-     * 获取当前位置开始向下数，下一个可以focus的editText的位置
-     * @param pos adapterPosition
-     * @return 返回的是在datalist中的pos
-     */
     private int getNextFocusPos(int pos){
         int firstPos=((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
         int childCount=recyclerView.getChildCount();
@@ -239,10 +222,6 @@ public class PlanListFragment extends Fragment {
         return returnPos;
     }
 
-    /**
-     * 合并当前项和上一项的文本内容
-     * @param pos
-     */
     private void mergeText(int pos){
         String curContent=dataList.get(pos).getContent();
         int preStatus=dataList.get(pos-1).getStatus();

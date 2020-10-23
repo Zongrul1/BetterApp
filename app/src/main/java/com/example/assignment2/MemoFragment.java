@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import retrofit2.Response;
 
 public class MemoFragment extends Fragment {
 
+    private MainActivity mainActivity;
     private RecyclerView listView;
     private MemoAdapter memoAdapter;
     private ArrayList<Memo> memo = new ArrayList<>();;
@@ -68,12 +70,13 @@ public class MemoFragment extends Fragment {
         requestMemo(MyApplication.getToken());
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the fragment_login for this fragment
         View view = inflater.inflate(R.layout.fragment_memo, container, false);
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.setSelectedFragemnt(this);
         listView = view.findViewById(R.id.memoList);
         memoAdapter = new MemoAdapter(getContext(), R.layout.memo_item, memo,getHandler());
         listView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL));

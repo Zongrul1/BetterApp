@@ -40,10 +40,11 @@ public class PlanListActivity extends BaseActivity implements View.OnClickListen
     private View graphTab;
     private ImageView graphImg;
     private TextView graphText;
-    private FragmentManager fragmentManager;
     private PlanListFragment homeFragment;
     private DateFragment calendarFragment;
     private GraphFragment graphFragment;
+    private FragmentManager fragmentManager;
+
     private Button MenuButton;
     private TextView banner;
     private static final String[] FRAGMENT_TAGS=
@@ -89,7 +90,7 @@ public class PlanListActivity extends BaseActivity implements View.OnClickListen
         final Fragment[] fragments = {new PlanListFragment(),new DateFragment(),new GraphFragment()};
         tabLayout.addTab(tabLayout.newTab().setText("PLAN"));
         tabLayout.addTab(tabLayout.newTab().setText("CALENDER"));
-        tabLayout.addTab(tabLayout.newTab().setText("Chart"));
+        tabLayout.addTab(tabLayout.newTab().setText("CHART"));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -143,16 +144,6 @@ public class PlanListActivity extends BaseActivity implements View.OnClickListen
         setSupportActionBar(toolbar);
     }
 
-
-    private void clearSelection(){
-        homeImg.setImageResource(R.drawable.home);
-        homeText.setTextColor(getResources().getColor(R.color.day_text_color));
-        calendarImg.setImageResource(R.drawable.calendar);
-        calendarText.setTextColor(getResources().getColor(R.color.day_text_color));
-        graphImg.setImageResource(R.drawable.graph);
-        graphText.setTextColor(getResources().getColor(R.color.day_text_color));
-
-    }
     private void hideFragments(FragmentTransaction transaction){
         if(homeFragment!=null){
             transaction.hide(homeFragment);
@@ -266,7 +257,7 @@ public class PlanListActivity extends BaseActivity implements View.OnClickListen
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long curTime= System.currentTimeMillis();
             if ((curTime - preTime) > 1000 * 2) {
-                ToastUtil.showToast("再按一次退出程序");
+                ToastUtil.showToast("Press twice to return main menu");
                 preTime = curTime;
             }else{
                 finish();

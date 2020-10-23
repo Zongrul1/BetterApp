@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,8 +13,21 @@ public class MyApplication extends Application {
     private static Context mContext;
     private static String token;
     private static String username;
+    private static int stepCount;
     private static List<Activity> activitylsit=new LinkedList<Activity>();
+    private static PedometerFragment pedofragment = new PedometerFragment();
 
+    public static int getStepCount() {
+        return stepCount;
+    }
+
+    public static void setStepCount(int stepCount) {
+        MyApplication.stepCount = stepCount;
+    }
+
+    public static PedometerFragment getPedofragment() {
+        return pedofragment;
+    }
 
     public static String getToken() {
         return token;
