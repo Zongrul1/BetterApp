@@ -95,7 +95,7 @@ public class CalendarView extends View {
         selectedBgPaint.setColor(selectedBgColor);
 
         Rect rect=new Rect();
-        dayPaint.getTextBounds("日",0,1,rect);
+        dayPaint.getTextBounds(" ",0,1,rect);
         dayTextHeight=rect.height();
     }
 

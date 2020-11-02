@@ -55,6 +55,13 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+
+        super.onResume();
+        username.setText("Hi! "  + MyApplication.getUsername());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the fragment_login for this fragment
@@ -72,7 +79,7 @@ public class MainFragment extends Fragment {
         changeUser = view.findViewById(R.id.change_user);
         introduction = view.findViewById(R.id.introduction);
         username = view.findViewById(R.id.username);
-        username.setText(username.getText() + " "  + MyApplication.getUsername());
+        username.setText("Hi! "  + MyApplication.getUsername());
         Typeface rl = ResourcesCompat.getFont(getActivity(),R.font.rl);
         introduction.setTypeface(rl);
         username.setTypeface(rl);
@@ -100,29 +107,29 @@ public class MainFragment extends Fragment {
                         }) .show();
             }
         });
-
         emotion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CardDialogStyle);
                 builder.setTitle("Choose Your Emotion Today");
-                //    指定下拉列表的显示数据
                 final String[] contacts = {"Happy", "Normal","Unhappy"};
-                //    设置一个下拉的列表选择项
                 builder.setItems(contacts, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0:
                                 avater.setImageResource(R.drawable.unicorn_happy);
+                                introduction.setText("emotion|happy");
                                 requestUpdateState(states[0],MyApplication.getToken());
                                 break;
                             case 1:
                                 avater.setImageResource(R.drawable.unicorn_normal);
+                                introduction.setText("emotion|normal");
                                 requestUpdateState(states[1],MyApplication.getToken());
                                 break;
                             case 2:
                                 avater.setImageResource(R.drawable.unicorn_unhappy);
+                                introduction.setText("emotion|unhappy");
                                 requestUpdateState(states[2],MyApplication.getToken());
                                 break;
 
@@ -132,8 +139,6 @@ public class MainFragment extends Fragment {
                 builder.show();
             }
         });
-
-
         memo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,11 +151,9 @@ public class MainFragment extends Fragment {
                         .commit();
             }
         });
-
         pedo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 ((AppCompatActivity)getActivity()).getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.layout_fragment, MyApplication.getPedofragment())
@@ -159,7 +162,6 @@ public class MainFragment extends Fragment {
                         .commit();
             }
         });
-
         focus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,12 +192,15 @@ public class MainFragment extends Fragment {
                     }
                     else if(state.equals(states[0])){
                         avater.setImageResource(R.drawable.unicorn_happy);
+                        introduction.setText("emotion|happy");
                     }
                     else if(state.equals(states[1])){
                         avater.setImageResource(R.drawable.unicorn_normal);
+                        introduction.setText("emotion|normal");
                     }
                     else if(state.equals(states[2])){
-                        avater.setImageResource(R.drawable.unicorn_happy);
+                        avater.setImageResource(R.drawable.unicorn_unhappy);
+                        introduction.setText("emotion|unhappy");
                     }
                 }
                 else{

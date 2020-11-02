@@ -15,9 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.assignment2.R;
-import com.example.assignment2.Utils.LogUtil;
 import com.example.assignment2.Model.PlanListItem;
+import com.example.assignment2.R;
 import com.example.assignment2.listener.OnBackPressListener;
 import com.example.assignment2.listener.OnClickListener;
 import com.example.assignment2.listener.OnNextListener;
@@ -113,8 +112,6 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHo
         viewHolder.content_edit_text.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-             //   LogUtil.e("keyCode="+keyCode+"\tevent="+event.getAction());
-             //   LogUtil.e("keycode_del="+ KeyEvent.KEYCODE_DEL+"\taction_down="+ KeyEvent.ACTION_DOWN);
                 if(event.getAction() == KeyEvent.ACTION_DOWN&& event.getKeyCode() == KeyEvent.KEYCODE_DEL){
                     EditText editText = (EditText)v;
                 //    LogUtil.e("execute OnBackPress now");

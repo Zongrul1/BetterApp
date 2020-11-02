@@ -1,25 +1,21 @@
 package com.example.assignment2.Subsciber;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.assignment2.LoginActivity;
+
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
-
-import com.example.assignment2.LoginActivity;
-import com.example.assignment2.MyApplication;
 
 import rx.Subscriber;
 
 public class MainSubscriber<T> extends Subscriber<T> {
 
     private HelperSubscriber mSubscriberOnNextListener;
-
-
     private Context context;
 
     public MainSubscriber(HelperSubscriber mSubscriberOnNextListener, Context context) {
@@ -51,7 +47,6 @@ public class MainSubscriber<T> extends Subscriber<T> {
             context.startActivity(intent);
         }
     }
-
 
     @Override
     public void onNext(T t) {

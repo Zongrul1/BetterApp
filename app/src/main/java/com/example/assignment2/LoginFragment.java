@@ -1,7 +1,6 @@
 package com.example.assignment2;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -21,8 +20,6 @@ import com.example.assignment2.Subsciber.HelperSubscriber;
 import com.example.assignment2.Subsciber.MainSubscriber;
 import com.example.assignment2.rxRetrofit.RxRetrofit;
 import com.example.assignment2.rxRetrofit.Utility;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -122,7 +119,6 @@ public class LoginFragment extends Fragment {
                 }
             }
         };
-        //获取信息
     }
 
     public void requestUser(String type,String name,String password) {

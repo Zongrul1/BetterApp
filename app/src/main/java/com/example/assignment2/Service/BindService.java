@@ -56,6 +56,7 @@ public class BindService extends Service implements SensorEventListener {  //you
         int versions = Build.VERSION.SDK_INT;
         if (versions >= 19) {
             addCountStepListener();
+            Log.i("Sensor using:","TYPE_STEP_COUNTER");
         } else {
             addAccStepListener();
         }
@@ -69,7 +70,7 @@ public class BindService extends Service implements SensorEventListener {  //you
         if (countSensor != null) {
             stepSensorType = Sensor.TYPE_STEP_COUNTER;
             sensorManager.registerListener(BindService.this, countSensor, SensorManager.SENSOR_DELAY_NORMAL);
-         //   Log.i("Type is: ", "Sensor.TYPE_STEP_COUNTER");
+            Log.i("Type is: ", "Sensor.TYPE_STEP_COUNTER");
         } else if (detectorSensor != null) {
             stepSensorType = Sensor.TYPE_STEP_DETECTOR;
             sensorManager.registerListener(BindService.this, detectorSensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -81,7 +82,7 @@ public class BindService extends Service implements SensorEventListener {  //you
      * activate Acceleration Sensor
      */
     private void addAccStepListener() {
-       // Log.i("BindService", "Acceleration Sensor");
+        Log.i("BindService", "Acceleration Sensor");
         acc_StepCount = new Step();
         acc_StepCount.setSteps(currentSteps);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);

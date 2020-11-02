@@ -23,8 +23,6 @@ public class Step implements StepListener {
         public void countStep() {
             this.timeOfLastPeak = this.timeOfThisPeak;
             this.timeOfThisPeak = System.currentTimeMillis();
-         //   Log.i("countStep","Sensor data refresh callback");
-//        notifyListener();
             if (this.timeOfThisPeak - this.timeOfLastPeak <= 3000L) {
                 if (this.temp_count < 5) {
                     this.temp_count++;
@@ -56,7 +54,7 @@ public class Step implements StepListener {
         public void notifyListener(){
             if(this.stepChangeListener != null){
          //       Log.i("countStep","Update statistics");
-                this.stepChangeListener.stepChanged(this.current_Count);  //当前步数通过接口传递给调用者
+                this.stepChangeListener.stepChanged(this.current_Count);
             }
         }
         public  void initListener(StepChangeListener listener){

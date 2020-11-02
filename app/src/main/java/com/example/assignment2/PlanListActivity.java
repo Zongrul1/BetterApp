@@ -130,15 +130,7 @@ public class PlanListActivity extends BaseActivity implements View.OnClickListen
         banner.setTypeface(rl);
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewpager);
-//        homeTab=findViewById(R.id.home_tab);
-//        homeImg=findViewById(R.id.home_img);
-//        homeText=findViewById(R.id.home_text);
-//        calendarTab=findViewById(R.id.calendar_tab);
-//        calendarImg=findViewById(R.id.calendar_img);
-//        calendarText=findViewById(R.id.calendar_text);
-//        graphTab=findViewById(R.id.graph_tab);
-//        graphImg=findViewById(R.id.graph_img);
-//        graphText=findViewById(R.id.graph_text);
+
     }
     private void initToolbar(){
         setSupportActionBar(toolbar);
@@ -157,9 +149,6 @@ public class PlanListActivity extends BaseActivity implements View.OnClickListen
     }
 
         private void initListener(){
-//        homeTab.setOnClickListener(this);
-//        calendarTab.setOnClickListener(this);
-//        graphTab.setOnClickListener(this);
         MenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,83 +156,9 @@ public class PlanListActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
-//    private void setTabSelection(int index){
-//        clearSelection();
-//        FragmentTransaction transaction=fragmentManager.beginTransaction();
-//        hideFragments(transaction);
-//        switch (index){
-//            case 0:
-//                savedIndex=0;
-//                //toolbar.setTitle(getResources().getString(R.string.home));
-//                homeImg.setImageResource(R.drawable.home2);
-//                homeText.setTextColor(getResources().getColor(R.color.colorPrimary));
-//                if(homeFragment==null){
-//                    homeFragment=new PlanListFragment();
-//                    transaction.add(R.id.main_content,homeFragment,FRAGMENT_TAGS[0]);
-//                }else{
-//                    transaction.show(homeFragment);
-//                }
-//                break;
-//            case 1:
-//                savedIndex=1;
-//                toolbar.setTitle(getResources().getString(R.string.calendar));
-//                calendarImg.setImageResource(R.drawable.calendar2);
-//                calendarText.setTextColor(getResources().getColor(R.color.colorPrimary));
-//                if(calendarFragment==null){
-//                    calendarFragment=new DateFragment();
-//                    transaction.add(R.id.main_content,calendarFragment,FRAGMENT_TAGS[1]);
-//                }else{
-//                    transaction.show(calendarFragment);
-//                }
-//                break;
-//            case 2:
-//                savedIndex=2;
-//                toolbar.setTitle(getResources().getString(R.string.graph));
-//                graphImg.setImageResource(R.drawable.graph2);
-//                graphText.setTextColor(getResources().getColor(R.color.colorPrimary));
-//                if(graphFragment==null){
-//                    graphFragment=new GraphFragment();
-//                    transaction.add(R.id.main_content,graphFragment,FRAGMENT_TAGS[2]);
-//                }else{
-//                    transaction.show(graphFragment);
-//                }
-//                break;
-//        }
-//        transaction.commit();
-//    }
-//    private void clearSelection(){
-//        homeImg.setImageResource(R.drawable.home);
-//        homeText.setTextColor(getResources().getColor(R.color.day_text_color));
-//        calendarImg.setImageResource(R.drawable.calendar);
-//        calendarText.setTextColor(getResources().getColor(R.color.day_text_color));
-//        graphImg.setImageResource(R.drawable.graph);
-//        graphText.setTextColor(getResources().getColor(R.color.day_text_color));
-//
-//    }
-//    private void hideFragments(FragmentTransaction transaction){
-//        if(homeFragment!=null){
-//            transaction.hide(homeFragment);
-//        }
-//        if(calendarFragment!=null){
-//            transaction.hide(calendarFragment);
-//        }
-//        if(graphFragment!=null){
-//            transaction.hide(graphFragment);
-//        }
-//    }
+
     @Override
     public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.home_tab:
-//                setTabSelection(0);
-//                break;
-//            case R.id.calendar_tab:
-//                setTabSelection(1);
-//                break;
-//            case R.id.graph_tab:
-//                setTabSelection(2);
-//                break;
-//        }
     }
 
     @Override

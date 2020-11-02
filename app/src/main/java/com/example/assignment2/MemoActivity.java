@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.assignment2.Model.Memo;
 import com.example.assignment2.Subsciber.HelperSubscriber;
 import com.example.assignment2.Subsciber.MainSubscriber;
 import com.example.assignment2.rxRetrofit.RxRetrofit;
@@ -47,7 +46,6 @@ public class MemoActivity extends AppCompatActivity {
         editTitle = findViewById(R.id.editTitle);
         editContent = findViewById(R.id.editContent);
         Intent intent = getIntent();
-        /*取出Intent中附加的数据*/
         type = intent.getStringExtra("Type");
         if(intent.getStringExtra("Id") != null) MemoId = intent.getStringExtra("Id");
         if(intent.getStringExtra("Title") != null) editTitle.setText(intent.getStringExtra("Title"));

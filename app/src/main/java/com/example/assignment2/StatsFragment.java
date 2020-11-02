@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,40 +183,6 @@ public class StatsFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setUsageInfo(long startMillis, long endMillis) {
-        /*if (appList != null) {
-            PackageManager packageManager = context.getPackageManager();
-            ArrayList<Float> values = new ArrayList<Float>();
-            ApplicationInfo info = null;
-
-            for (int i = 0; i < appList.size(); i++) {
-                String appPkg = appList.get(i);
-                String appname = null;
-                int uid = 0;
-                try {
-                    appname = (String) packageManager.getApplicationLabel(packageManager.
-                            getApplicationInfo(appPkg, PackageManager.GET_META_DATA));
-                    info = packageManager.getApplicationInfo(appPkg, 0);
-
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                if (appname != null) {
-                    appNameList.add(appname);
-                    if (mode == NETWORK_MODE) {
-                        uid = info.uid;
-                        values.add(fetchNetworkStatsInfo(startMillis, endMillis, uid));
-
-                    } else {
-                        values.add(fetchAppStatsInfo(startMillis, endMillis, appPkg));
-                    }
-
-                } else {
-                    appList.remove(appPkg);
-                }
-            }
-        }
-        */
         PackageManager packageManager = context.getPackageManager();
         ArrayList<Float> values = new ArrayList<Float>();
         HashMap<Float, String> valueMap = fetchAppStatsInfo(startMillis, endMillis);
@@ -253,13 +220,7 @@ public class StatsFragment extends Fragment {
         HashMap<Float, String> totalMap = new HashMap<>();
         for (String appPkg : lUsageStatsMap.keySet()){
         //if (lUsageStatsMap.containsKey(appPkg)) {
-            if (selectedPeriod == DAILY || selectedPeriod == YESTERDAY) {
-                total = (FocusHelper.getMinutes(lUsageStatsMap.get(appPkg).
-                        getTotalTimeInForeground()));
-            } else {
-                total = (FocusHelper.getHours(lUsageStatsMap.get(appPkg).
-                        getTotalTimeInForeground()));
-            }
+            total = (FocusHelper.getMinutes(lUsageStatsMap.get(appPkg).getTotalTimeInForeground()));
             totalMap.put(total, appPkg);
         }
         return totalMap;
@@ -356,36 +317,42 @@ public class StatsFragment extends Fragment {
     }
 
     private void setData(ArrayList<Float> values) {
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        try {
+            ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
 
-        for (int i = 0; i < values.size(); i++) {
-            float val = values.get(i);
-            yVals1.add(new BarEntry(i, val));
-        }
-
-        BarDataSet set1;
-
-        if (barChart.getData() != null &&
-                barChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
-            set1.setValues(yVals1);
-            barChart.getData().notifyDataChanged();
-            barChart.notifyDataSetChanged();
-        } else {
-            if (selectedPeriod == DAILY || selectedPeriod == YESTERDAY) {
-                set1 = new BarDataSet(yVals1, ((mode == 0) ? "App" : "Network") + " usage in " + ((mode == 0) ? "Minutes" : "MB"));
-            } else {
-                set1 = new BarDataSet(yVals1, ((mode == 0) ? "App" : "Network") + " usage in " + ((mode == 0) ? "Hours" : "GB"));
+            for (int i = 0; i < values.size(); i++) {
+                float val = values.get(i);
+                yVals1.add(new BarEntry(i, val));
             }
-            set1.setDrawIcons(false);
-            set1.setColors(ColorTemplate.LIBERTY_COLORS);
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-            dataSets.add(set1);
-            BarData data = new BarData(dataSets);
-            data.setValueTextSize(10f);
-            data.setBarWidth(0.2f);
-            barChart.setData(data);
-            barChart.setVisibleXRangeMaximum(4.0f);
+
+            BarDataSet set1;
+
+            if (barChart.getData() != null &&
+                    barChart.getData().getDataSetCount() > 0) {
+                set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
+                set1.setValues(yVals1);
+                barChart.getData().notifyDataChanged();
+                barChart.notifyDataSetChanged();
+            } else {
+                set1 = new BarDataSet(yVals1, ((mode == 0) ? "App" : "Network") + " usage in " + ((mode == 0) ? "Minutes" : "MB"));
+
+                set1.setDrawIcons(false);
+                set1.setColors(ColorTemplate.LIBERTY_COLORS);
+                ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+                dataSets.add(set1);
+                BarData data = new BarData(dataSets);
+                data.setValueTextSize(10f);
+                data.setBarWidth(0.2f);
+                try {
+                    barChart.setData(data);
+                    barChart.setVisibleXRangeMaximum(4.0f);
+                }catch (Exception e) {
+                    Log.d("STATSERRl1", dataSets.toString());
+                    Log.d("STATSERRl2", dataSets.get(0).getEntryForIndex(0).toString());
+                }
+            }
+        }catch (Exception e){
+
         }
     }
 

@@ -15,6 +15,7 @@ public class DayStatus {
     private int year;
     private int month;
     private int day;
+
     public DayStatus(String time, int status, float ratio, int listNum, int finishNum, int unFinishNum, int year, int month, int day){
         this.time=time;
         this.status=status;
@@ -26,6 +27,7 @@ public class DayStatus {
         this.month=month;
         this.day=day;
     }
+
     public String getTime() {
         return time;
     }

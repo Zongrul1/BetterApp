@@ -22,7 +22,7 @@
     </style>
 
     <style name="CardDialogStyle">
-        <!-- 背景 -->
+        <!-- background -->
         <item name="android:windowBackground">@drawable/index</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:textColor">@color/text</item>
@@ -32,16 +32,14 @@
         <item name="listPreferredItemPaddingStart">10dip</item>
         <item name="listPreferredItemPaddingEnd">10dip</item>
         <item name="android:colorControlHighlight">@color/colorBar</item>
-        <!-- 边框 -->
+        <!-- frame -->
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
-        <!-- 半透明 -->
-        <!--<item name="android:windowIsTranslucent">true</item>-->
-        <!-- 无标题 -->
+        <!-- No title -->
         <item name="android:windowNoTitle">true</item>
-        <!-- Dialog以外的区域模糊效果 -->
+        <!-- Dialog dim enable -->
         <!--<item name="android:backgroundDimEnabled">true</item>-->
-        <!-- Dialog进入及退出动画 -->
+        <!-- Dialog entry & out annimation -->
         <!--<item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>-->
     </style>
 >>>>>>> 1.emotion 2.plan layout 3.focus viewpager

@@ -105,12 +105,10 @@ public class DateFragment extends Fragment {
             public void onItemSelected(Date selectedDate) {
               //  LogUtil.e("Update date:"+ DateUtil.getYearMonthDayNumberic(selectedDate));
                 initHeaderText(selectedDate);
-
                 Date lastMonthDate= DateUtil.getLastMonthDate(selectedDate);
                 Date nextMonthDate= DateUtil.getNextMonthDate(selectedDate);
                 calendarViews[0].setSelectedDate(lastMonthDate);
                 calendarViews[2].setSelectedDate(nextMonthDate);
-
                 dataList.clear();
                 List<PlanListItem> list= PlanListItemDao.queryAllItemsExceptNoContent(DateUtil.getYearMonthDayNumberic(selectedDate));
                 dataList.addAll(list);

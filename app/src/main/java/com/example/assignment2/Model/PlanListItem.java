@@ -5,10 +5,8 @@ public class PlanListItem {
     public static final int NO_RECORD=102;
     public static final int FINISH=103;
     public static final int UNFINISH=104;
-
     public static final int TYPE_NORMAL=106;
     public static final int TYPE_EMPTY=107;
-
     private long id;
     private String content;
     private int status;
@@ -19,6 +17,7 @@ public class PlanListItem {
         this.status=status;
         this.time=time;
     }
+
     public String getContent() {
         return content;
     }

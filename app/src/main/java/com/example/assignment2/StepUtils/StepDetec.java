@@ -6,6 +6,13 @@ import android.hardware.SensorEventListener;
 
 import com.example.assignment2.listener.StepListener;
 
+/**
+ *  take the idea from dylan step_detector
+ *  dylan provides algorithm
+ *  @creator_dylan
+ */
+
+
 public class StepDetec implements SensorEventListener {
         float[] oriValues = new float[3];
         final int ValueNum = 4;
@@ -14,8 +21,7 @@ public class StepDetec implements SensorEventListener {
         boolean isDirectionUp = false;
         int continueUpCount = 0;
         int continueUpFormerCount = 0;
-
-    //we use Peak Statistics & Dynamic Threshold to decide whether it is a step or not
+    // use Peak Statistics & Dynamic Threshold to decide whether it is a step or not
         boolean lastStatus = false;
         float peakOfWave = 0;
         float valleyOfWave = 0;
@@ -73,7 +79,6 @@ public class StepDetec implements SensorEventListener {
             }
             gravityOld = values;
         }
-
         /*
          * detect Peak using 4 conditions
          * */
@@ -118,26 +123,26 @@ public class StepDetec implements SensorEventListener {
         }
 
         public float averageValue(float[] value, int n) {
-            float averager = 0;
+            float averagerVal = 0;
             for (int i = 0; i < n; i++) {
-                averager += value[i];
+                averagerVal += value[i];
             }
-            averager = averager / ValueNum;
-            if (averager >= 8) {
-                averager = (float) 4.3;
+            averagerVal = averagerVal / ValueNum;
+            if (averagerVal >= 8) {
+                averagerVal = (float) 4.3;
             }
-            else if (averager >= 7 && averager < 8) {
-                averager = (float) 3.3;
+            else if (averagerVal >= 7 && averagerVal < 8) {
+                averagerVal = (float) 3.3;
             }
-            else if (averager >= 4 && averager < 7) {
-                averager = (float) 2.3;
+            else if (averagerVal >= 4 && averagerVal < 7) {
+                averagerVal = (float) 2.3;
             }
-            else if (averager >= 3 && averager < 4) {
-                averager = (float) 2.0;
+            else if (averagerVal >= 3 && averagerVal < 4) {
+                averagerVal = (float) 2.0;
             }
             else {
-                averager = (float) 1.3;
+                averagerVal = (float) 1.3;
             }
-            return averager;
+            return averagerVal;
         }
     }

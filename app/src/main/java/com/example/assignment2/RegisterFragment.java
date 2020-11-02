@@ -1,6 +1,5 @@
 package com.example.assignment2;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -133,7 +132,6 @@ public class RegisterFragment extends Fragment {
                 }
             }
         };
-        //获取信息
     }
 
     public void requestUser(String type,String name,String password) {
